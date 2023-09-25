@@ -1,0 +1,10 @@
+{
+  "name": "vm-utils",
+  "version": "1.0.0",
+  "description": "A set of utils to handle work with sandboxed JavaScript environments",
+  "main": "index.js",
+  "repository": "git@github.com:formio/vm-utils.git",
+  "author": "Alexey Nikipelau <alexey.nikipelau@form.io>",
+  "license": "MIT",
+  "private": true
+}
