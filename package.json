@@ -3,10 +3,17 @@
   "version": "1.0.0",
   "description": "A set of utils to handle work with sandboxed JavaScript environments",
   "main": "index.js",
+  "scripts": {
+    "test": "echo \"Not tests yet\""
+  },
   "repository": "git@github.com:formio/vm-utils.git",
   "author": "Alexey Nikipelau <alexey.nikipelau@form.io>",
   "license": "MIT",
   "private": true,
+  "bugs": {
+    "url": "https://github.com/formio/formio-workers/issues"
+  },
+  "homepage": "https://github.com/formio/formio-workers#readme",
   "dependencies": {
     "isolated-vm": "^4.6.0"
   }
