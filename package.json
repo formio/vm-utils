@@ -6,5 +6,8 @@
   "repository": "git@github.com:formio/vm-utils.git",
   "author": "Alexey Nikipelau <alexey.nikipelau@form.io>",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "isolated-vm": "^4.6.0"
+  }
 }
