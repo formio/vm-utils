@@ -11,9 +11,9 @@
   "license": "MIT",
   "private": true,
   "bugs": {
-    "url": "https://github.com/formio/formio-workers/issues"
+    "url": "https://github.com/formio/vm-utils/issues"
   },
-  "homepage": "https://github.com/formio/formio-workers#readme",
+  "homepage": "https://github.com/formio/vm-utils#readme",
   "dependencies": {
     "isolated-vm": "^4.6.0"
   }
