@@ -9,18 +9,18 @@ const {Isolate} = require('isolated-vm');
 async function _transfer(key, value, dest, visited, c) {
   // Handle circular links
   if (visited.has(value)) {
-    await c.evalSync(`${dest}['${key}'] = eval($0)`, [visited.get(value)]);
+    await c.evalClosure(`${dest}['${key}'] = eval($0)`, [visited.get(value)]);
     return;
   }
 
   // Handle function
   if (typeof value === 'function') {
     // Bind functions
-    await c.evalSync(`${dest}['${key}'] = $0`, [value]);
+    await c.evalClosure(`${dest}['${key}'] = $0`, [value]);
   }
   // Handle primitives
   else if (typeof value !== 'object' || value === null) {
-    await c.evalSync(`${dest}['${key}'] = $0`, [value]);
+    await c.evalClosure(`${dest}['${key}'] = $0`, [value]);
     // Handle primitives
     if (
       value === null ||
@@ -36,19 +36,19 @@ async function _transfer(key, value, dest, visited, c) {
   }
   // Handle arrays
   else if (value instanceof Array) {
-    await c.evalSync(`${dest}['${key}'] = []`, []);
+    await c.evalClosure(`${dest}['${key}'] = []`, []);
   }
   // Handle objects
   else if (typeof value === 'object') {
-    await c.evalSync(`${dest}['${key}'] = {}`, []);
+    await c.evalClosure(`${dest}['${key}'] = {}`, []);
     // Transfer prototype
     for (let p in value.__proto__) {
       if (typeof value.__proto__[p] === 'function') {
         // TODO: check which isolate is used for executing callbacks
-        await c.evalSync(`${dest}['${key}']['${p}'] = $0`, [(...args) => value.__proto__[p].apply(value, args)])
+        await c.evalClosure(`${dest}['${key}']['${p}'] = $0`, [(...args) => value.__proto__[p].apply(value, args)])
       }
       else {
-        await c.evalSync(`${dest}['${key}']['${p}'] = $0`, [value.__proto__[p]]);
+        await c.evalClosure(`${dest}['${key}']['${p}'] = $0`, [value.__proto__[p]]);
       }
     }
   }
