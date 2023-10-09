@@ -1,5 +1,5 @@
 {
-  "name": "vm-utils",
+  "name": "@formio/vm-utils",
   "version": "1.0.0",
   "description": "A set of utils to handle work with sandboxed JavaScript environments",
   "main": "index.js",
