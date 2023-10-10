@@ -2,7 +2,7 @@ const ivm = require('isolated-vm');
 
 const DEFAULT_MEMORY_LIMIT = 16;
 
-function newIsolate(memoryLimit) {
+function getIsolate(memoryLimit) {
   return new ivm.Isolate({
     memoryLimit: memoryLimit |
                  process.env.VM_MEMORY_LIMIT |
@@ -11,6 +11,6 @@ function newIsolate(memoryLimit) {
 }
 
 module.exports = {
-  newIsolate,
+  getIsolate,
   ...require('./src/vmUtil')
 }
