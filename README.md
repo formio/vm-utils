@@ -3,13 +3,14 @@ Form.io VM utils
 
 This library provides a set of utils and wrappers to help handle sandoxed JavaScript environments
 
-"Isolated-VM" Library Attribution
-===============================
+------------------------------------------
+
+
+### "Isolated-VM" Library Attribution
 
 This project uses the "isolated-vm" library, which is distributed under the Internet Systems Consortium License (ISL).
 
-Internet Systems Consortium License (ISL)
-------------------------------------------
+#### Internet Systems Consortium License (ISL)
 
 Copyright 2017 Marcel Laverdet
 
