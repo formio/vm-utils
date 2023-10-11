@@ -8,7 +8,7 @@
   },
   "repository": "git@github.com:formio/vm-utils.git",
   "author": "Alexey Nikipelau <alexey.nikipelau@form.io>",
-  "license": "MIT",
+  "license": "OSL-3.0",
   "private": true,
   "bugs": {
     "url": "https://github.com/formio/vm-utils/issues"
