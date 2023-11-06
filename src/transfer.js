@@ -1,6 +1,7 @@
 'use strict';
 
 const {Isolate} = require('isolated-vm');
+const { TestClass } = require('../test/TestClass');
 
 // Each function has sync and async implementations
 
@@ -126,6 +127,30 @@ function _transferSync(key, value, dest, visited, c) {
         c.evalClosureSync(`${dest}['${key}']['${p}'] = $0`, [value.__proto__[p]]);
       }
     }
+
+    // Transfer prototype
+    for (let p of Object.getOwnPropertyNames(Object.getPrototypeOf(value))) {
+      // For some reason, it is throwing an error when trying to check the type of propety
+      // If it is a getter or setter and it is using private fields
+      // So, swallow the error
+      try {
+        if (typeof Object.getPrototypeOf(value)[p] === 'function') {
+          c.evalClosureSync(`${dest}['${key}']['${p}'] = $0`, [Object.getPrototypeOf(value)[p].bind(value)]);
+        }
+      }
+      catch {}
+      const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(value), p);
+      if (descriptor.get) {
+        // if (typeof descriptor.get.call(value) === 'object' && descriptor.get.call(value) instanceof TestClass) {
+          // Object.defineProperty(value, p, {value: descriptor.get.call(value), enumerable: true});
+        // } else
+        c.evalClosureSync(`Object.defineProperty(${dest}['${key}'], '${p}', {get: $0, configurable: true})`, [descriptor.get.bind(value)]);
+      }
+      if (descriptor.set) {
+        c.evalClosureSync(`Object.defineProperty(${dest}['${key}'], '${p}', {set: $0, configurable: true})`, [descriptor.set.bind(value)]);
+      }
+    }
+
   }
 
   // Add to map for resolving circluar links
@@ -140,6 +165,10 @@ function _transferSync(key, value, dest, visited, c) {
 // Keepilng its prototype and callable objects
 function transferSync(name, value, context) {
    _transferSync(name, value, 'globalThis', new Map(), context);
+}
+
+function transferToSync(dest, name, value, context) {
+  _transferSync(name, value, `globalThis['${dest}']`, new Map(), context);
 }
 
 // Transfers function to isolate in the way it will be owned by targeted isolate
@@ -160,6 +189,7 @@ module.exports = {
   freeze,
   transferSync,
   transferFnSync,
+  transferToSync,
   freezeSync,
   Isolate
 };

@@ -4,7 +4,7 @@
   "description": "A set of utils to handle work with sandboxed JavaScript environments",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Not tests yet\""
+    "test": "mocha ./test/*.test.js"
   },
   "repository": "git@github.com:formio/vm-utils.git",
   "author": "Alexey Nikipelau <alexey.nikipelau@form.io>",
@@ -15,6 +15,13 @@
   },
   "homepage": "https://github.com/formio/vm-utils#readme",
   "dependencies": {
-    "isolated-vm": "^4.6.0"
+    "formiojs": "^4.17.3",
+    "isolated-vm": "^4.6.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4"
+  },
+  "devDependencies": {
+    "chai": "^4.3.10",
+    "mocha": "^10.2.0"
   }
 }
