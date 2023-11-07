@@ -1,7 +1,6 @@
 'use strict';
 
 const {Isolate} = require('isolated-vm');
-const { TestClass } = require('../test/TestClass');
 
 // Each function has sync and async implementations
 
