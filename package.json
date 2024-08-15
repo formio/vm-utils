@@ -16,7 +16,7 @@
   "homepage": "https://github.com/formio/vm-utils#readme",
   "dependencies": {
     "formiojs": "^4.17.3",
-    "isolated-vm": "^4.6.0",
+    "isolated-vm": "^4.7.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4"
   },
